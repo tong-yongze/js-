@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div>
+      <span v-if="articleInfo && articleInfo.data && articleInfo.data.res"></span>
+      <span v-if="articleInfo?.data?.res"></span>
+    </div> -->
+    <script>
+      // 对象数组的解构赋值
+      // let [a, b] = [1, 2, 3, 4, 5];
+      // let [c, ...d] = [1, 2, 3, 4, 5];
+      // console.log(a, b, c, d);
+
+      // let { data: res } = { config: {}, headers: {}, data: { name: 1 } };
+      // console.log(res);
+
+      // //  剩余参数与扩展运算符
+      // function fn(p1, ...p2) {
+      //   console.log(p1, p2);
+      // }
+      // fn(1, 2, 3, 4, 5); // 逗号分隔的叫 参数序列
+
+      // var arr1 = [5, 6, 7, 8, 9];
+      // var arr2 = [10, 11, 12];
+      // console.log(...arr1); // 将数组转换为参数序列
+      // // 我们以前在做 上拉加载下一页数据，进行拼接的时候使用的
+      // console.log([...arr1, ...arr2]);
+      // console.log(arr1.concat(arr2));
+
+      // arr1.push(...arr2);
+      // console.log(arr1);
+    </script>
+    <script>
+      var num = 10_000_000_000;
+      console.log(num);
+
+      // 函数的默认参数默认值有个技巧
+      function fn(param) {
+        // 逻辑或 在参数默认值里面进行判断的时候，可以匹配所有的假值
+        // null undefined 0 '' NaN false
+        // let a = param || '张三';
+        // ?? 就是来代替以前的 ||， 它只能匹配我们的 null 和 undefined
+        let a = param ?? '张三';
+        console.log(a);
+      }
+      fn(0);
+
+      // ?.  这个运算符
+      var o = { name: 'zs' };
+      // Cannot read property 'addr' of undefined
+      // console.log(o.age.addr);
+      console.log(o.age?.addr);
+    </script>
+  </body>
+</html>
