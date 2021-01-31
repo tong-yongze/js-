@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function fn(param) {
+      // const a = param || '李四';
+      const a = param ?? '张三'
+      console.log(a);
+    }
+    fn(0)
+
+    var o = {name: 'zs'}
+    // console.log(o.age.addr);
+    console.log(o.age?.addr);
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1 1 2 3 5 8 13 21 34 55
+    // function shulie(n) {
+    //   if(n === 1 || n === 2) {
+    //     return 1
+    //   }
+    //  return shulie(n-1) + shulie(n-2)
+    // }
+    // console.log(shulie(-1))
+  </script>
+  <script>
+    var list = [
+      {
+        id: 1,
+        name: 'aa',
+        children: [
+          {
+            id: 11,
+            name: 'bb'
+          },
+          {
+            id: 12,
+            name: 'cc',
+            children: [
+              {
+                id: 121,
+                name: 'cccc'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    // var str = {}
+    // function recusion(arr, id) {
+    //   arr.forEach(item => {
+    //     // 这样就证明找到了  然后就赋值给str 最后return 就是第一层的浅拷贝了
+    //     if (item.id === id) {
+    //       str = item.name
+    //     } else if (item.children && item.children.length > 0) {
+    //       str = recusion(item.children, id)
+    //     }
+    //   })
+    //   return str
+    // }
+    // console.log(recusion(list, 121))
+
+    var str = ''
+    function recusion(arr,id) {
+      arr.forEach(item => {
+        if(item.id ===id ) {
+          str = item.name
+        } else if(item.children && item.children.length > 0) {
+          str = recusion(item.children,id)
+        }
+      })
+      return str
+    }
+    console.log(recusion(list,121));
+  </script>
+</body>
+
+</html>

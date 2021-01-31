@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 6个属性值的学习
+    var obj = {name: 'zs'}
+
+    Object.defineProperty(obj, 'age',{
+      // 属性描述符 2个
+      value: '24',
+      writable: true // 这个值是我们age属性是否可以更改 默认不能更改
+    })
+    obj.age = 30
+    console.log(obj);
+  </script>
+</body>
+</html>
