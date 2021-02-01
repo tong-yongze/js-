@@ -1,22 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script>
     // 6个属性值的学习
-    var obj = {name: 'zs'}
+    // 属性描述符 value + writable 和存取描述符 set get 不能同时存在
+    // 通用描述符  enumerable(对象可否枚举) + configuable(属性可不可以改)
+    // vue的数据劫持就说 存取描述符 getter  setter
+    // 使用对象字面量创建的对象 一些配置属性都是 true
+    var obj = { name: 'zs' }
 
-    Object.defineProperty(obj, 'age',{
+    Object.defineProperty(obj, 'age', {
       // 属性描述符 2个
       value: '24',
-      writable: true // 这个值是我们age属性是否可以更改 默认不能更改
+      // 这个值是我们age属性是否可以更改 默认不能更改
+      // writable: true,
+      // 说明让不让你修改属性 或者让你修改配置
+      // configurable: true
+      // 能否遍历这个对象
+      enumerable: true
     })
-    obj.age = 30
-    console.log(obj);
+    obj.age = 30  // 配置 writable
+    delete obj.age;  // 删不了  需要配置 configurable
+    // delete obj.name;  //这样可以删除
+    // console.log(obj);
+
+    // enumerable 这样不仅可以遍历name  age也可以
+    for (var key in obj) {
+      // console.log(key);
+    }
+
+
+    let o2 = {}
+    let p1 = 1
+    Object.defineProperty(o2, 'addr', {
+      configurable: true,
+      enumerable: true,
+      get() {
+        if (p1 == '1') {
+          return '数据劫持1'
+        } else if (p1 === '2') {
+          return '修改为2'
+        } else {
+          return '默认值'
+        }
+      },
+      set(val) {
+        p1 = val
+      }
+    })
+    o2.addr = 1
+    // console.log(o2.addr);
+
+    // 输入 1-10 显示少年    10-20 显示青少年   输入20-50 显示中年
+
+    function Person() {
+      let age;
+      Object.defineProperty(this, 'age', {
+        get() {
+          let strArr = ['老年', '中年', '青少年', '少年']
+          let ageArr = [65, 20, 10, 0]
+
+          for (let i = 0; i < strArr.length; i++) {
+            // 这种就简化了后面的 if 代码  可以理解为 如果age 是xx时,大于ageArr 数组中索引xx 那么就返回 strArr中的索引xx
+            if(age > ageArr[i]) {
+              return strArr[i]
+            }
+            // if (age > 65) {
+            //   return strArr[0]
+            // } else if (age > 20) {
+            //   return strArr[1]
+            // } else if (age > 10) {
+            //   return strArr[2]
+            // } else {
+            //   return strArr[3]
+            // }
+          }
+        },
+        set(val) {
+          age = val
+        }
+      })
+    }
+
+    var p = new Person()
+    p.age = 5
+    console.log(p.age);
+    p.age = 15
+    console.log(p.age);
+    p.age = 25
+    console.log(p.age);
+    p.age = 75
+    console.log(p.age);
   </script>
 </body>
+
 </html>
