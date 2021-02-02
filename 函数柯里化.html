@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 将多个参数的函数  转换为任意个数参数的函数
+    function sum(x, y, z) {
+      return x + y + z
+    }
+    // function sum(x) {
+    //   return function (y) {
+    //     return function (z) {
+    //       return x + y + z
+    //     }
+    //   }
+    // }
+
+    // 这个函数就是模仿的 lodash 里面的 curry方法
+    function curry(cb, currArgs) {
+      return function () {
+        let args = [...arguments]
+
+        if (currArgs) {
+          args = args.concat(currArgs)
+        }
+        if (args.length < cb.length) {
+          return curry(cb, args)
+        }
+        return cb.apply(null, args)
+      }
+    }
+    let fn = curry(sum)
+    console.log(fn(1, 2, 3));
+    console.log(fn(1)(2)(3));
+    console.log(fn(1, 2)(3));
+  </script>
+</body>
+
+</html>
