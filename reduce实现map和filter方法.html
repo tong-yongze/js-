@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 实现一个 reduce 方法
+    var arr = [1,2,3,4,23]
+    Array.prototype.myReduce = function(cb, initalValue) {
+      // cb 是回调函数 他有四个参数 第一个参数是初始值 需要确定下来
+      // ?? 对于这个符号来说 假值 只有null undefined
+      // || 对象这个 逻辑或 来说  假值有 null  undefined 0 '' false
+      // let start = initalValue ? initalValue : this[0]
+
+      let start, i;
+      if(initalValue || initalValue === 0) {
+        start = initalValue;
+        i = 0
+      } else {
+        start = this[0]
+        i = 1
+      }
+      let preVal = start
+
+      for(i; i<this.length; i++) {
+        preVal = cb(preVal,this[i],i, this)
+      }
+      return preVal;
+    }
+    console.log(arr.myReduce((prev,curr) => (prev += curr),10));
+  </script>
+
+  <script>
+    // reduce 实现 map filter 方法
+    // var list = [11, 33, 55]
+    // const list2 = list.map((item,index,arr)=>{
+    //   return item = item*2
+    //   })
+    //  console.log(list2);
+
+    // Array.prototype.mymap = function (cb, thisValue) {
+    //   return this.reduce((prev, curr, index, arr) => {
+    //     prev.push(cb.call(thisValue, curr, index, arr))
+    //     return prev
+    //   }, [])
+    // }
+    // let p1 = list.mymap(item => item * 2, { addr: '重庆' })
+    // console.log(p1);
+  </script>
+
+  <script>
+    // reduce 实现 filter 方法
+    // var list = [1,2,3,4,5,123]
+    // const v = list.filter((prev,index,arr) =>{
+    //   console.log(prev,index,arr);
+    //   return prev %2 ===0
+    // },{age:1})
+    // console.log(v);
+
+    // Array.prototype.myFilter = function(cb,thisVal) {
+    //   return this.reduce((prev,curr,index,arr) =>{
+    //     cb.call(thisVal, curr,index,arr) ? prev.push(curr) : null
+    //     return prev
+    //   },[])
+    // }
+    // console.log(list.myFilter((item)=> item %2 !==0));
+  </script>
+</body>
+
+</html>
